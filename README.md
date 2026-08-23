@@ -245,4 +245,4 @@ MIT License
 
 Based on original work by [tobias-weiss-ai-xr/pi-openspec](https://github.com/tobias-weiss-ai-xr/pi-openspec)
 
-Created by [Raphael Bahat](https://earendil.works)
+Created by Raphael Bahat
