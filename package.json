@@ -1,0 +1,44 @@
+{
+  "name": "pi-openspec-context",
+  "version": "0.1.0",
+  "description": "Lightweight Pi extension for automatic OpenSpec context injection into system prompts",
+  "license": "MIT",
+  "author": "Raphael Bahat <raphael@earendil.works>",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "openspec",
+    "extension",
+    "context",
+    "spec-driven-development"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint ."
+  },
+  "pi": {
+    "extensions": [
+      "./dist/index.js"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "^0.84.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "eslint": "^9.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
