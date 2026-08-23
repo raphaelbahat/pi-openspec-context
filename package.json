@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "pi-openspec-context",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Lightweight Pi extension for automatic OpenSpec context injection into system prompts",
   "license": "MIT",
   "author": "Raphael Bahat <raphael@earendil.works>",
