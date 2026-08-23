@@ -19,8 +19,14 @@ A lightweight Pi extension that automatically injects OpenSpec context into syst
 
 ### As a Pi Package
 
+You can install `pi-openspec-context` directly into Pi from either NPM or GitHub:
+
 ```bash
+# Install from NPM
 pi install pi-openspec-context
+
+# Or install from GitHub
+pi install github:raphaelbahat/pi-openspec-context
 ```
 
 ### Global Installation (for local development)
@@ -48,9 +54,9 @@ npm install --save-dev pi-openspec-context
 ## Prerequisites
 
 ### Required
-- **openspec CLI**: Must be installed and accessible in your PATH
-  - Installation: `npm install -g @tobias-weiss-ai-xr/openspec` or `pip install openspec`
-  - Verify: `openspec --version`
+- **OpenSpec CLI**: Must be installed and accessible in your PATH.
+  - Please follow the official [OpenSpec Installation Documentation](https://github.com/Fission-AI/OpenSpec/blob/main/docs/installation.md) to set up the CLI.
+  - Verify with: `openspec --version`
 
 ### Optional
 - Pi coding agent v0.84.0 or later (typically included with Pi installation)
@@ -103,7 +109,7 @@ Optional environment variable to override the default timeout:
 
 **Solution**:
 1. Verify OpenSpec is installed: `which openspec`
-2. Install if missing: `npm install -g @tobias-weiss-ai-xr/openspec`
+2. If missing, follow the [OpenSpec Installation Documentation](https://github.com/Fission-AI/OpenSpec/blob/main/docs/installation.md).
 3. Check PATH is configured: `echo $PATH`
 4. Restart Pi after installing OpenSpec
 
