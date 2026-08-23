@@ -24,7 +24,7 @@ COPY eslint.config.js ./
 RUN npm run build
 
 # Copy docker test directory
-COPY docker/test-e2e.ts ./docker/
+COPY docker/test-e2e.test.ts ./docker/
 
 # Create openspec mock script for testing environments
 RUN mkdir -p /usr/local/bin && \
