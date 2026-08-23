@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "pi-openspec-context",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lightweight Pi extension for automatic OpenSpec context injection into system prompts",
   "license": "MIT",
   "author": "Raphael Bahat <raphael@earendil.works>",
@@ -45,9 +45,7 @@
     "eslint": "^9.0.0",
     "typescript": "^5.4.0",
     "typescript-eslint": "^8.67.0",
-    "vitest": "^1.6.0"
-  },
-  "dependencies": {
-    "@gaodes/pi-test-harness": "file:../pi-test-harness"
+    "vitest": "^1.6.0",
+    "@gaodes/pi-test-harness": "^1.0.3"
   }
 }
