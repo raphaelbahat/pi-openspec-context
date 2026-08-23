@@ -4,6 +4,14 @@
   "version": "0.1.4",
   "description": "Lightweight Pi extension for automatic OpenSpec context injection into system prompts",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaelbahat/pi-openspec-context.git"
+  },
+  "bugs": {
+    "url": "https://github.com/raphaelbahat/pi-openspec-context/issues"
+  },
+  "homepage": "https://github.com/raphaelbahat/pi-openspec-context#readme",
   "author": "Raphael Bahat <raphael@earendil.works>",
   "keywords": [
     "pi-package",
