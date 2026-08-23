@@ -1,0 +1,9 @@
+version: "1.0"
+metadata:
+  name: "Test OpenSpec Project"
+  description: "Sample OpenSpec configuration for e2e testing"
+specs:
+  api:
+    title: "REST API"
+    description: "Main API endpoints"
+    version: "1.0.0"

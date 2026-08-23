@@ -24,6 +24,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "vitest run docker/test-e2e.test.ts",
     "lint": "eslint ."
   },
   "pi": {

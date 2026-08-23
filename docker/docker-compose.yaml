@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  test-e2e:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: pi-openspec-context-e2e
+    environment:
+      - NODE_ENV=test
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    volumes:
+      # Mount sample OpenSpec workspace
+      - ./openspec-workspace:/workspace/openspec:ro
+      # Mount non-OpenSpec test directory for fallback testing
+      - ./test-directory:/workspace/test-dir:ro
+      # Mount test output for inspection
+      - ./test-output:/app/test-output
+    working_dir: /app
+    command: npm run test:e2e
