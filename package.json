@@ -36,9 +36,12 @@
   },
   "devDependencies": {
     "@earendil-works/pi-coding-agent": "^0.84.0",
-    "typescript": "^5.4.0",
-    "vitest": "^1.6.0",
+    "@types/node": "^20.0.0",
     "eslint": "^9.0.0",
-    "@types/node": "^20.0.0"
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "@gaodes/pi-test-harness": "file:../pi-test-harness"
   }
 }
