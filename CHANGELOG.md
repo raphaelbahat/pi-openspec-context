@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2026-08-23
+
+### Added
+- Automated GitHub Actions workflow (`.github/workflows/publish.yml`) for publishing to NPM with provenance via Trusted Publishing on release.
+
+### Changed
+- Removed external author hyperlink in `README.md`.
+
 ## [0.1.2] - 2026-08-23
 
 ### Fixed
