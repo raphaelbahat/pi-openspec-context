@@ -1,3 +1,5 @@
+import type { PiExecContext } from "./types.js";
+
 export const DEFAULT_TIMEOUT_MS = 10000;
 
 /**
@@ -18,7 +20,7 @@ export function sanitizeContext(text: string): string {
  * Executes openspec CLI command and returns output or null on failure
  */
 export async function runOpenSpec(
-  pi: { exec: (cmd: string, args: string[], opts?: any) => Promise<any> },
+  pi: PiExecContext,
   args: string[],
   cwd: string,
   timeoutMs: number = DEFAULT_TIMEOUT_MS
@@ -43,7 +45,7 @@ export async function runOpenSpec(
     }
 
     return cleaned;
-  } catch (error) {
+  } catch {
     // Catch all exceptions (ENOENT, timeout, etc.) and return null
     return null;
   }

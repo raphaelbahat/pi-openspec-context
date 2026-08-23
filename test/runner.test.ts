@@ -1,5 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { stripAnsi, sanitizeContext, runOpenSpec, DEFAULT_TIMEOUT_MS } from "../src/runner";
+import { describe, it, expect, vi } from "vitest";
+import type { PiExecContext } from "../src/types.js";
+import { stripAnsi, sanitizeContext, runOpenSpec, DEFAULT_TIMEOUT_MS } from "../src/runner.js";
 
 describe("stripAnsi", () => {
   it("should strip ANSI color codes", () => {
@@ -52,9 +53,9 @@ describe("runOpenSpec", () => {
       stdout: "some output",
       stderr: "error",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await runOpenSpec(pi as any, ["list"], "/tmp");
+    const result = await runOpenSpec(pi, ["list"], "/tmp");
     expect(result).toBeNull();
     expect(mockExec).toHaveBeenCalledWith("openspec", ["list"], {
       timeout: DEFAULT_TIMEOUT_MS,
@@ -68,9 +69,9 @@ describe("runOpenSpec", () => {
       stdout: "  \u001b[32mstore-001\u001b[0m  \n",
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await runOpenSpec(pi as any, ["list"], "/tmp");
+    const result = await runOpenSpec(pi, ["list"], "/tmp");
     expect(result).toBe("store-001");
   });
 
@@ -80,25 +81,25 @@ describe("runOpenSpec", () => {
       stdout: "   \n  ",
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await runOpenSpec(pi as any, ["list"], "/tmp");
+    const result = await runOpenSpec(pi, ["list"], "/tmp");
     expect(result).toBeNull();
   });
 
   it("should return null on ENOENT (binary not found)", async () => {
     const mockExec = vi.fn().mockRejectedValue(new Error("ENOENT"));
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await runOpenSpec(pi as any, ["list"], "/tmp");
+    const result = await runOpenSpec(pi, ["list"], "/tmp");
     expect(result).toBeNull();
   });
 
   it("should return null on timeout", async () => {
     const mockExec = vi.fn().mockRejectedValue(new Error("timeout"));
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await runOpenSpec(pi as any, ["list"], "/tmp", 5000);
+    const result = await runOpenSpec(pi, ["list"], "/tmp", 5000);
     expect(result).toBeNull();
   });
 
@@ -108,9 +109,9 @@ describe("runOpenSpec", () => {
       stdout: "output",
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    await runOpenSpec(pi as any, ["list"], "/tmp", 30000);
+    await runOpenSpec(pi, ["list"], "/tmp", 30000);
     expect(mockExec).toHaveBeenCalledWith("openspec", ["list"], {
       timeout: 30000,
       cwd: "/tmp",
@@ -123,9 +124,9 @@ describe("runOpenSpec", () => {
       stdout: "output",
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    await runOpenSpec(pi as any, ["list"], "/tmp");
+    await runOpenSpec(pi, ["list"], "/tmp");
     expect(mockExec).toHaveBeenCalledWith("openspec", ["list"], {
       timeout: DEFAULT_TIMEOUT_MS,
       cwd: "/tmp",

@@ -1,17 +1,26 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type {
-  ExtensionAPI,
   BeforeAgentStartEvent,
   ExtensionContext,
 } from "@earendil-works/pi-coding-agent";
-import extensionDefault, { createExtension, contextCache } from "../src/index";
-import { OpenSpecContextCache } from "../src/cache";
-import * as detector from "../src/detector";
-import type { OpenSpecTarget } from "../src/types";
+import extensionDefault, { createExtension, contextCache } from "../src/index.js";
+import { OpenSpecContextCache } from "../src/cache.js";
+import * as detector from "../src/detector.js";
+import type { PiExecContext } from "../src/types.js";
+
+interface BeforeAgentStartEventResult {
+  systemPrompt?: string;
+}
+
+type BeforeAgentStartHandler = (event: BeforeAgentStartEvent, ctx?: ExtensionContext) => Promise<BeforeAgentStartEventResult>;
+
+interface MockPi extends PiExecContext {
+  on: (eventName: string, handler: BeforeAgentStartHandler) => void;
+}
 
 describe("extension entrypoint", () => {
-  let mockPi: any;
-  let eventListeners: Map<string, Function[]>;
+  let mockPi: MockPi;
+  let eventListeners: Map<string, BeforeAgentStartHandler[]>;
 
   beforeEach(() => {
     // Reset cache before each test
@@ -25,17 +34,17 @@ describe("extension entrypoint", () => {
 
     // Create mock PI API
     mockPi = {
-      on: vi.fn((eventName: string, handler: Function) => {
+      on: vi.fn((eventName: string, handler: BeforeAgentStartHandler) => {
         if (!eventListeners.has(eventName)) {
           eventListeners.set(eventName, []);
         }
         eventListeners.get(eventName)!.push(handler);
       }),
       exec: vi.fn(),
-    };
+    } as MockPi;
   });
 
-  function getBeforeAgentStartHandlers(): Function[] {
+  function getBeforeAgentStartHandlers(): BeforeAgentStartHandler[] {
     return eventListeners.get("before_agent_start") || [];
   }
 

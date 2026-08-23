@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "pi-openspec-context",
   "version": "0.1.0",
   "description": "Lightweight Pi extension for automatic OpenSpec context injection into system prompts",
@@ -17,11 +18,12 @@
   "files": [
     "dist",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "vitest run docker/test-e2e.test.ts",
@@ -38,8 +40,11 @@
   "devDependencies": {
     "@earendil-works/pi-coding-agent": "^0.84.0",
     "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@typescript-eslint/parser": "^8.67.0",
     "eslint": "^9.0.0",
     "typescript": "^5.4.0",
+    "typescript-eslint": "^8.67.0",
     "vitest": "^1.6.0"
   },
   "dependencies": {

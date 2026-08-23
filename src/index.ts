@@ -7,7 +7,6 @@ import type {
 import { detectOpenSpecTarget } from "./detector.js";
 import { runOpenSpec, sanitizeContext } from "./runner.js";
 import { OpenSpecContextCache } from "./cache.js";
-import type { OpenSpecTarget } from "./types.js";
 
 // Global cache instance for the extension
 export const contextCache = new OpenSpecContextCache();

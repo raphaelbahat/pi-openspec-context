@@ -1,10 +1,11 @@
 import * as path from "path";
 import * as fs from "fs";
-import {
+import type {
   OpenSpecTarget,
   OpenSpecStoreListOutput,
-} from "./types";
-import { runOpenSpec } from "./runner";
+  PiExecContext,
+} from "./types.js";
+import { runOpenSpec } from "./runner.js";
 
 /**
  * Finds the OpenSpec root directory by traversing upwards from cwd
@@ -37,7 +38,7 @@ export function findOpenSpecRoot(
  * Finds a store ID that matches the given cwd by querying openspec store list
  */
 export async function findStoreId(
-  pi: { exec: (cmd: string, args: string[], opts?: any) => Promise<any> },
+  pi: PiExecContext,
   cwd: string
 ): Promise<string | null> {
   // Execute openspec store list --json command
@@ -86,7 +87,7 @@ export async function findStoreId(
  * Detects the OpenSpec target (root or store) for the given directory
  */
 export async function detectOpenSpecTarget(
-  pi: { exec: (cmd: string, args: string[], opts?: any) => Promise<any> },
+  pi: PiExecContext,
   cwd: string
 ): Promise<OpenSpecTarget | null> {
   // First try to find an OpenSpec root

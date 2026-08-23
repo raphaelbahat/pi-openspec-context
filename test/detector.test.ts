@@ -1,10 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import * as path from "path";
+
 import {
   findOpenSpecRoot,
   findStoreId,
   detectOpenSpecTarget,
-} from "../src/detector";
+} from "../src/detector.js";
 
 describe("findOpenSpecRoot", () => {
   it("should find config in current directory", () => {
@@ -51,9 +52,9 @@ describe("findStoreId", () => {
       stdout: storeListOutput,
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/data/store1");
+    const result = await findStoreId(pi, "/home/data/store1");
     expect(result).toBe("store-001");
   });
 
@@ -70,9 +71,9 @@ describe("findStoreId", () => {
       stdout: storeListOutput,
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/data/store1/subdir/nested");
+    const result = await findStoreId(pi, "/home/data/store1/subdir/nested");
     expect(result).toBe("store-001");
   });
 
@@ -89,9 +90,9 @@ describe("findStoreId", () => {
       stdout: storeListOutput,
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/other");
+    const result = await findStoreId(pi, "/home/other");
     expect(result).toBeNull();
   });
 
@@ -101,9 +102,9 @@ describe("findStoreId", () => {
       stdout: "",
       stderr: "error",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/data/store1");
+    const result = await findStoreId(pi, "/home/data/store1");
     expect(result).toBeNull();
   });
 
@@ -113,9 +114,9 @@ describe("findStoreId", () => {
       stdout: "invalid json",
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/data/store1");
+    const result = await findStoreId(pi, "/home/data/store1");
     expect(result).toBeNull();
   });
 
@@ -129,9 +130,9 @@ describe("findStoreId", () => {
       stdout: storeListOutput,
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/data/store1");
+    const result = await findStoreId(pi, "/home/data/store1");
     expect(result).toBeNull();
   });
 
@@ -147,9 +148,9 @@ describe("findStoreId", () => {
       stdout: storeListOutput,
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/data/store1/subdir");
+    const result = await findStoreId(pi, "/home/data/store1/subdir");
     expect(result).toBe("store-001");
   });
 
@@ -165,9 +166,9 @@ describe("findStoreId", () => {
       stdout: storeListOutput,
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/data/store1/subdir");
+    const result = await findStoreId(pi, "/home/data/store1/subdir");
     expect(result).toBe("store-001");
   });
 });
@@ -184,9 +185,9 @@ describe("detectOpenSpecTarget", () => {
 
     // Now test that detectOpenSpecTarget would return root when config exists
     const mockExec = vi.fn();
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
     
-    const target = await detectOpenSpecTarget(pi as any, "/home/project");
+    const target = await detectOpenSpecTarget(pi, "/home/project");
     // Since fs.existsSync is the default, we test the logic path separately
     // The actual integration test requires real file system access
     expect(target).toBeDefined();
@@ -204,21 +205,14 @@ describe("detectOpenSpecTarget", () => {
       stdout: storeListOutput,
       stderr: "",
     });
-    const pi = { exec: mockExec };
+    const pi: PiExecContext = { exec: mockExec };
 
-    const result = await findStoreId(pi as any, "/home/data/store1/subdir");
+    const result = await findStoreId(pi, "/home/data/store1/subdir");
     expect(result).toBe("store-001");
   });
 
-  it("should return null when outside openspec", async () => {
+  it("should return null when outside openspec", () => {
     // Mock that no store is found and no openspec root
-    const mockExec = vi.fn().mockResolvedValue({
-      code: 0,
-      stdout: JSON.stringify({ stores: [] }),
-      stderr: "",
-    });
-    const pi = { exec: mockExec };
-
     const existsFn = vi.fn(() => false);
     const result = findOpenSpecRoot("/home/other", existsFn);
     expect(result).toBeNull();

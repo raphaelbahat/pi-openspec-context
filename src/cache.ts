@@ -2,12 +2,16 @@ import * as path from "path";
 import type { OpenSpecTarget } from "./types.js";
 
 export function targetToKey(target: OpenSpecTarget): string {
-  if (target.type === "root") {
-    return "root:" + path.resolve(target.path);
-  } else if (target.type === "store") {
-    return "store:" + target.id;
+  switch (target.type) {
+    case "root":
+      return "root:" + path.resolve(target.path);
+    case "store":
+      return "store:" + target.id;
+    default:
+      // Exhaustiveness check: if we reach here, there's an unhandled case
+      const exhaustiveCheck: never = target;
+      throw new Error(`Unknown target type: ${exhaustiveCheck}`);
   }
-  throw new Error(`Unknown target type: ${(target as any).type}`);
 }
 
 export class OpenSpecContextCache {

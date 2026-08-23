@@ -18,3 +18,11 @@ export interface OpenSpecExecutionResult {
   stderr: string;
   code: number;
 }
+
+export interface PiExecContext {
+  exec(
+    cmd: string,
+    args: string[],
+    opts?: { timeout?: number; cwd?: string }
+  ): Promise<OpenSpecExecutionResult>;
+}
